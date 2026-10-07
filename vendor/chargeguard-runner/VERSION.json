@@ -1,0 +1,39 @@
+{
+  "package": "@anasabubakar/chargeguard-runner",
+  "version": "0.1.0",
+  "commit": "c2a332add4cb3cb1f917f7a6990257ea445560c7",
+  "reportVersion": "1",
+  "vendoredFor": "chargeguard-workbench",
+  "sha256": {
+    "report.v1.schema.json": "58058271acef98f878624dac13ea3b00ba13bf4fbb7b107a6839ae70e2a8d482",
+    "suite.v1.schema.json": "de36f4ce67a737fb444ae2f1ba4409782dab07c8f13dd9a648075de358a4dfb1",
+    "suite-stub.json": "37479b17fdb989617c733c72bb7d36ad06070aac934623b287d5c17e5d246bdc",
+    "suite-testnet.json": "a2fd69dace5a6ad8d42a106053d9e74a75e776aeeaf417db069561f9e6236740"
+  },
+  "evidence": {
+    "suite-stub.json": {
+      "evidenceClass": "integration",
+      "generatedAt": "2026-10-07T15:18:24.027Z",
+      "command": "node dist/cli.js suite --backend stub --out docs/evidence/suite-stub.json --text-out docs/evidence/suite-stub.txt",
+      "runs": 21,
+      "sdk": {
+        "@stellar/mpp": "0.7.1",
+        "mppx": "0.6.31",
+        "@stellar/stellar-sdk": "15.1.0"
+      },
+      "node": "v24.19.0"
+    },
+    "suite-testnet.json": {
+      "evidenceClass": "testnet settlement",
+      "generatedAt": "2026-10-07T15:20:50.335Z",
+      "command": "node dist/cli.js suite --backend testnet --out docs/evidence/suite-testnet.json --text-out docs/evidence/suite-testnet.txt",
+      "runs": 9,
+      "sdk": {
+        "@stellar/mpp": "0.7.1",
+        "mppx": "0.6.31",
+        "@stellar/stellar-sdk": "15.1.0"
+      },
+      "node": "v24.19.0"
+    }
+  }
+}
