@@ -93,3 +93,23 @@ describe("loading a report", () => {
     expect(parseReportText(" ".repeat(8_000_001)).ok).toBe(false);
   });
 });
+
+describe("headline consistency", () => {
+  it("rejects a failing run relabelled as pass, a flipped expectation match and wrong suite totals", async () => {
+    const { toSuite } = await import("../src/data.ts");
+    const { readFileSync } = await import("node:fs");
+    const suite = JSON.parse(readFileSync("vendor/chargeguard-runner/suite-stub.json", "utf8"));
+    expect(toSuite(structuredClone(suite), "loaded").ok).toBe(true);
+    const failing = structuredClone(suite);
+    const i = failing.reports.findIndex((r: { verdict: string }) => r.verdict === "fail");
+    expect(i).toBeGreaterThanOrEqual(0);
+    failing.reports[i].verdict = "pass";
+    expect(toSuite(failing, "loaded")).toMatchObject({ ok: false });
+    const flipped = structuredClone(suite);
+    flipped.reports[0].matchesExpectation = !flipped.reports[0].matchesExpectation;
+    expect(toSuite(flipped, "loaded").ok).toBe(false);
+    const totals = structuredClone(suite);
+    totals.totals.pass += 1;
+    expect(toSuite(totals, "loaded").ok).toBe(false);
+  });
+});

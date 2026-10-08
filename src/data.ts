@@ -15,6 +15,23 @@ export const PAIRING = pairing;
 
 export type Loaded = { ok: true; suite: Suite; origin: "recorded" | "loaded" } | { ok: false; error: string };
 
+/** Headline fields must follow from the evidence in the same document; otherwise the file contradicts itself. */
+export function consistencyProblem(reports: Report[], totals?: Suite["totals"]): string | null {
+  for (const r of reports) {
+    const failedChecks = r.checks.filter((c) => !c.passed).length;
+    if (r.verdict === "pass" && failedChecks > 0) return `Inconsistent report ${r.scenario.id}: verdict is "pass" but ${failedChecks} check(s) failed.`;
+    if (r.verdict === "fail" && failedChecks === 0) return `Inconsistent report ${r.scenario.id}: verdict is "fail" but every check passed.`;
+    if (r.matchesExpectation !== (r.verdict === r.expectation)) return `Inconsistent report ${r.scenario.id}: matchesExpectation does not follow from verdict and expectation.`;
+  }
+  if (totals) {
+    const count = (v: string) => reports.filter((r) => r.verdict === v).length;
+    if (totals.runs !== reports.length || totals.pass !== count("pass") || totals.fail !== count("fail") || totals.inconclusive !== count("inconclusive") || totals.matchedExpectation !== reports.filter((r) => r.matchesExpectation).length) {
+      return "Inconsistent suite: its totals do not agree with its run reports.";
+    }
+  }
+  return null;
+}
+
 const issues = (c: Check) => (c.errors ?? []).slice(0, 5).map((e) => `${e.instancePath || "(root)"} ${e.message ?? ""}`.trim()).join("; ");
 
 /** Validates a parsed JSON value as a v1 suite or a single v1 run report (wrapped into a one-run suite). */
@@ -24,7 +41,9 @@ export function toSuite(raw: unknown, origin: "recorded" | "loaded"): Loaded {
   if (o.reportVersion !== "1") return { ok: false, error: `Unsupported report version ${JSON.stringify(o.reportVersion)}. This workbench reads report version 1 only.` };
   if (o.kind === "suite") {
     if (!checkSuite(raw)) return { ok: false, error: `Suite does not match the v1 suite schema: ${issues(checkSuite)}` };
-    return { ok: true, suite: raw as unknown as Suite, origin };
+    const suite = raw as unknown as Suite;
+    const bad = consistencyProblem(suite.reports, suite.totals);
+    return bad ? { ok: false, error: bad } : { ok: true, suite, origin };
   }
   if (o.kind === "run") {
     if (!checkReport(raw)) return { ok: false, error: `Report does not match the v1 report schema: ${issues(checkReport)}` };
@@ -40,7 +59,8 @@ export function toSuite(raw: unknown, origin: "recorded" | "loaded"): Loaded {
       totals: { runs: 1, pass: r.verdict === "pass" ? 1 : 0, fail: r.verdict === "fail" ? 1 : 0, inconclusive: r.verdict === "inconclusive" ? 1 : 0, matchedExpectation: r.matchesExpectation ? 1 : 0 },
       limits: r.limits,
     };
-    return { ok: true, suite, origin };
+    const bad = consistencyProblem(suite.reports);
+    return bad ? { ok: false, error: bad } : { ok: true, suite, origin };
   }
   return { ok: false, error: `Unknown report kind ${JSON.stringify(o.kind)}: expected "run" or "suite".` };
 }
