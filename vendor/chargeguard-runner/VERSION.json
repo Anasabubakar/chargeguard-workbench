@@ -1,7 +1,7 @@
 {
-  "package": "@anasabubakar/chargeguard-runner",
-  "version": "0.1.0",
-  "commit": "c2a332add4cb3cb1f917f7a6990257ea445560c7",
+  "package": "@anas.abubakar/chargeguard-runner",
+  "version": "0.1.1",
+  "commit": "957d8f222de3a5f0cc74b3b3e68f1340d9f0af0e",
   "reportVersion": "1",
   "vendoredFor": "chargeguard-workbench",
   "sha256": {
