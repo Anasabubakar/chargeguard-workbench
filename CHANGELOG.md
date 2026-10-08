@@ -1,7 +1,7 @@
 # Changelog
 
 ## 0.1.1
-- Runs and suites whose verdicts, expectation matches or totals contradict their checks are now rejected. Pairing unchanged (still tested with the 0.1.0 core snapshot it vendors).
+- Runs and suites whose verdicts, expectation matches or totals contradict their checks are now rejected. Re-paired with the published 0.1.1 release of its core (`compat.json` and the vendor stamp record the version and commit). Recorded real-run samples keep the version that recorded them.
 
 ## 0.1.0 (unreleased)
 - Recorded-evidence viewer: isolated-versus-shared comparison, per-worker lanes, four levels per payment, checks, chronology, limits.

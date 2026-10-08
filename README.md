@@ -26,7 +26,7 @@ Open a run or suite JSON you recorded with `chargeguard run --out` / `suite --ou
 
 ## Verification
 
-`pnpm run typecheck && pnpm test` (32 tests, vitest + jsdom), `pnpm build`. Pairing: runner 0.1.0 (see `compat.json`).
+`pnpm run typecheck && pnpm test` (33 tests, vitest + jsdom), `pnpm build`. Pairing: runner 0.1.1 (see `compat.json`).
 
 ## Limits and status
 

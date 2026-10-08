@@ -2,8 +2,8 @@
   "workbench": "0.1.1",
   "pairs": [
     {
-      "runner": "@anasabubakar/chargeguard-runner",
-      "version": "0.1.0",
+      "runner": "@anas.abubakar/chargeguard-runner",
+      "version": "0.1.1",
       "reportVersion": "1",
       "status": "tested"
     }
