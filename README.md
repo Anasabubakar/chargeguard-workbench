@@ -1,5 +1,7 @@
 # chargeguard-workbench
 
+**Documentation:** https://stellar-developer-tools.gitbook.io/chargeguard-workbench/
+
 Hosted demo: https://chargeguard-workbench-anasamasama.vercel.app
 
 A static page that shows **recorded ChargeGuard evidence**: the same Stellar MPP charge endpoint behind two worker processes, once with isolated in-memory stores (a repeated credential is accepted twice) and once with a shared atomic store (accepted once). It renders the per-worker timeline of accepted and rejected requests, keeps the four levels apart (accepted credential, submitted transaction, chain confirmation, service fulfillment), and shows the checks, the fault schedule and the limits.
