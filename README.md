@@ -1,12 +1,17 @@
+<p align="center"><img src="docs/assets/banner.svg" alt="chargeguard-workbench" width="100%"></p>
+
 # chargeguard-workbench
 
-**Documentation:** https://stellar-developer-tools.gitbook.io/chargeguard-workbench/
+[![CI](https://github.com/Charge-Guard/chargeguard-workbench/actions/workflows/ci.yml/badge.svg)](https://github.com/Charge-Guard/chargeguard-workbench/actions/workflows/ci.yml) [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE) [![Release](https://img.shields.io/github/v/release/Charge-Guard/chargeguard-workbench)](https://github.com/Charge-Guard/chargeguard-workbench/releases)
+
+[Documentation](https://stellar-developer-tools.gitbook.io/chargeguard-workbench/) · [Live demo](https://chargeguard-workbench-anasamasama.vercel.app) · [Core repository](https://github.com/Charge-Guard/chargeguard-runner) · [Issues](https://github.com/Charge-Guard/chargeguard-workbench/issues) · [Discussions](https://github.com/Charge-Guard/chargeguard-workbench/discussions)
+
 
 Hosted demo: https://chargeguard-workbench-anasamasama.vercel.app
 
 A static page that shows **recorded ChargeGuard evidence**: the same Stellar MPP charge endpoint behind two worker processes, once with isolated in-memory stores (a repeated credential is accepted twice) and once with a shared atomic store (accepted once). It renders the per-worker timeline of accepted and rejected requests, keeps the four levels apart (accepted credential, submitted transaction, chain confirmation, service fulfillment), and shows the checks, the fault schedule and the limits.
 
-It runs nothing: no scenario, no server call, no keys. Every state on screen comes from a report that [chargeguard-runner](https://github.com/Anasabubakar/chargeguard-runner) produced from real worker processes (integration evidence against a local stub chain, and testnet-settlement evidence against Stellar testnet). A finite number of runs is evidence, not a proof; nothing here shows linearizability or exactly-once delivery; payment channels are out of scope.
+It runs nothing: no scenario, no server call, no keys. Every state on screen comes from a report that [chargeguard-runner](https://github.com/Charge-Guard/chargeguard-runner) produced from real worker processes (integration evidence against a local stub chain, and testnet-settlement evidence against Stellar testnet). A finite number of runs is evidence, not a proof; nothing here shows linearizability or exactly-once delivery; payment channels are out of scope.
 
 ## Use
 
@@ -34,8 +39,42 @@ Open a run or suite JSON you recorded with `chargeguard run --out` / `suite --ou
 
 Shows recorded runs only; the bundled evidence is as old as its stamp. Not an audit or endorsement. Hosted on Vercel; GitHub CI is green. MIT licensed.
 
+## Repository layout
+
+- `docs/`: decision records (ADRs), evidence and assets
+- `gitbook/`: source of the GitBook documentation
+- `scripts/`: build, generation and recording scripts
+- `src/`: source
+- `test/`: tests
+- `vendor/`: pinned artifacts from the paired core repository
+
+## Documentation
+
+The full documentation is at https://stellar-developer-tools.gitbook.io/chargeguard-workbench/. It is built from the `gitbook/` folder of this repository and synced from `main`, so a fix to a page is a pull request here.
+
+## Contributing
+
+Open issues are scoped so one person can finish one in a single cycle, and each lists acceptance criteria. Read [CONTRIBUTING.md](CONTRIBUTING.md), pick an issue from the [issue list](https://github.com/Charge-Guard/chargeguard-workbench/issues), and say you are taking it before you start. Security reports go through [SECURITY.md](SECURITY.md), not public issues.
+
+## Maintainers
+
+| Maintainer | Role | GitHub |
+|---|---|---|
+| Anas Abubakar | Lead maintainer | [@Anasabubakar](https://github.com/Anasabubakar) |
+| Abdulbasit Fazazi | Co-maintainer | [@fazaziishola-coder](https://github.com/fazaziishola-coder) |
+
+## Community
+
+Questions and design discussion go in [GitHub Discussions](https://github.com/Charge-Guard/chargeguard-workbench/discussions). Bugs and scoped work go in [Issues](https://github.com/Charge-Guard/chargeguard-workbench/issues).
+
+## License
+
+MIT. See [LICENSE](LICENSE).
+
 ## Contributors
 
-<a href="https://github.com/Anasabubakar/chargeguard-workbench/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=Anasabubakar/chargeguard-workbench" alt="Contributors to chargeguard-workbench" />
+Thanks to all the contributors who have made this project possible.
+
+<a href="https://github.com/Charge-Guard/chargeguard-workbench/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=Charge-Guard/chargeguard-workbench" alt="Contributors to chargeguard-workbench" />
 </a>
