@@ -31,3 +31,9 @@ Open a run or suite JSON you recorded with `chargeguard run --out` / `suite --ou
 ## Limits and status
 
 Shows recorded runs only; the bundled evidence is as old as its stamp. Not an audit or endorsement. Hosted on Vercel; GitHub CI is green. MIT licensed.
+
+## Contributors
+
+<a href="https://github.com/Anasabubakar/chargeguard-workbench/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=Anasabubakar/chargeguard-workbench" alt="Contributors to chargeguard-workbench" />
+</a>
